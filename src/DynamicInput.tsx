@@ -56,8 +56,8 @@ const TagInput = () => {
     handleCursorPosition();
   };
 
-  const removeTag = (id: number) => {
-    setContent(content.filter((item) => item.id !== id));
+  const removeTag = (index: number) => {
+    setContent(content.filter((_, i) => i !== index));
   };
 
   console.log("content=--=", content);
@@ -72,12 +72,12 @@ const TagInput = () => {
             </span>
           ) : (
             <span
-              key={item.id}
+              key={`${item.label}-${index}`}
               className="flex items-center bg-gray-300 text-black px-3 py-1 rounded-full mr-2"
             >
               {item.label}
               <button
-                onClick={() => removeTag(item.id)}
+                onClick={() => removeTag(index)}
                 className="ml-1 bg-gray-700 text-white rounded-full px-2 py-1"
               >
                 x
