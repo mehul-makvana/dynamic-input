@@ -56,8 +56,8 @@ const TagInput = () => {
     handleCursorPosition();
   };
 
-  const removeTag = (label: string) => {
-    setContent(content.filter((item) => item.label !== label));
+  const removeTag = (id: number) => {
+    setContent(content.filter((item) => item.id !== id));
   };
 
   console.log("content=--=", content);
@@ -77,7 +77,7 @@ const TagInput = () => {
             >
               {item.label}
               <button
-                onClick={() => removeTag(item.label)}
+                onClick={() => removeTag(item.id)}
                 className="ml-1 bg-gray-700 text-white rounded-full px-2 py-1"
               >
                 x
