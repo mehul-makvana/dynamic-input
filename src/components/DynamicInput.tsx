@@ -12,6 +12,16 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ tags }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const stringInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  const getTextWidth = (text: string, font: string) => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    if (context) {
+      context.font = font;
+      return context.measureText(text).width;
+    }
+    return 0;
+  };
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.setSelectionRange(inputValue.length, inputValue.length);
@@ -115,10 +125,13 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ tags }) => {
                   ref={(el) => (stringInputRefs.current[index] = el)}
                   type="text"
                   value={item}
-                  className="rounded px-2 py-1 border border-transparent focus:border-none transition-all duration-300"
+                  className="rounded px-2 py-1 border border-transparent focus:outline-none transition-all duration-300"
                   onChange={(e) => handleStringChange(index, e.target.value)}
                   style={{
-                    width: item.length + "ch",
+                    width: `${Math.max(
+                      getTextWidth(item, "14px Arial") + 20,
+                      30
+                    )}px`,
                   }}
                 />
               );
@@ -126,11 +139,11 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ tags }) => {
               return (
                 <span
                   key={index}
-                  className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center space-x-2 gap-2"
+                  className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full flex items-center"
                 >
                   {item.tag}
                   <button
-                    className="text-red-500 hover:text-red-700 transition-colors duration-300"
+                    className="text-red-500 hover:text-red-700 transition-colors duration-300 ml-1"
                     onClick={() => handleTagRemove(index)}
                   >
                     &times;
