@@ -118,7 +118,10 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ tags }) => {
                   className="rounded bg-gray-100 px-2 py-1 border border-transparent focus:border-blue-500 transition-all duration-300"
                   onChange={(e) => handleStringChange(index, e.target.value)}
                   style={{
-                    width: item.length + "ch",
+                    width:
+                      item.length < 3
+                        ? 3 * item.length + "ch"
+                        : 2 * item.length + "ch",
                   }}
                 />
               );
