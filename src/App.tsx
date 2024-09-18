@@ -1,12 +1,14 @@
 import React from "react";
-import DynamicInput from "./DynamicInput";
+import DynamicInput from "./components/DynamicInput";
 
-function App() {
+const tags = ["React", "Next.js", "Tailwind", "JavaScript", "CSS"];
+
+const App = () => {
   return (
     <div>
-      <DynamicInput />
+      <DynamicInput tags={tags} />
     </div>
   );
-}
+};
 
 export default App;
