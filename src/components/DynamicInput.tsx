@@ -105,7 +105,7 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ tags }) => {
           </button>
         ))}
       </div>
-      <div className="relative border border-gray-300 rounded p-2 focus-within:border-blue-500 transition-all duration-300">
+      <div className="relative border border-gray-300 rounded p-2">
         <div className="flex flex-wrap gap-2 items-center">
           {inputContent.map((item, index) => {
             if (typeof item === "string") {
@@ -115,13 +115,10 @@ const DynamicInput: React.FC<DynamicInputProps> = ({ tags }) => {
                   ref={(el) => (stringInputRefs.current[index] = el)}
                   type="text"
                   value={item}
-                  className="rounded bg-gray-100 px-2 py-1 border border-transparent focus:border-blue-500 transition-all duration-300"
+                  className="rounded px-2 py-1 border border-transparent focus:border-none transition-all duration-300"
                   onChange={(e) => handleStringChange(index, e.target.value)}
                   style={{
-                    width:
-                      item.length < 3
-                        ? 3 * item.length + "ch"
-                        : 2 * item.length + "ch",
+                    width: item.length + "rem",
                   }}
                 />
               );
